@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">Edit the post {{ id }}</div>
+
+    <div class="card-body">
+      <form (ngSubmit)="save()" [formGroup]="editForm">
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="Title">Title</label>
+          <div class="col-md-8">
+            <input
+              class="form-control"
+              id="Title"
+              type="text"
+              placeholder="Title (required)"
+              formControlName="title"
+              required
+              [ngClass]="{
+                'is-invalid':
+                  (editForm.get('title')?.touched ||
+                    editForm.get('title')?.dirty) &&
+                  !editForm.get('title')?.valid
+              }"
+            />
+            <span class="invalid-feedback">
+              <span *ngIf="editForm.get('title')?.errors?.['required']">
+                Please enter your title.
+              </span>
+              <span *ngIf="editForm.get('title')?.errors?.['minlength']">
+                The title must be longer than 3 characters.
+              </span>
+            </span>
+          </div>
+        </div>
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="Body">Body</label>
+          <div class="col-md-8">
+            <input
+              class="form-control"
+              id="Body"
+              type="text"
+              placeholder="Body (required)"
+              formControlName="body"
+              required
+              [ngClass]="{
+                'is-invalid':
+                  (editForm.get('body')?.touched ||
+                    editForm.get('body')?.dirty) &&
+                  !editForm.get('body')?.valid
+              }"
+            />
+            <span class="invalid-feedback">
+              <span *ngIf="editForm.get('body')?.errors?.['required']">
+                Please enter your body.
+              </span>
+              <span *ngIf="editForm.get('body')?.errors?.['minlength']">
+                The body must be longer than 3 characters.
+              </span>
+            </span>
+          </div>
+        </div>
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="UserId">UserId</label>
+          <div class="col-md-8">
+            <input
+              class="form-control"
+              id="UserId"
+              type="number"
+              placeholder="UserId (required)"
+              formControlName="userId"
+              required
+              [ngClass]="{
+                'is-invalid':
+                  (editForm.get('userId')?.touched ||
+                    editForm.get('userId')?.dirty) &&
+                  !editForm.get('userId')?.valid
+              }"
+            />
+            <span class="invalid-feedback">
+              <span *ngIf="editForm.get('userId')?.errors?.['required']">
+                Please enter your userId.
+              </span>
+            </span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+    <div class="spinner-border text-success" role="status" *ngIf="loading">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <button
+      class="btn btn-dark me-md-2"
+      type="button"
+      (click)="save()"
+      *ngIf="!loading"
+    >
+      Save
+    </button>
+    <button routerLink="/posts" class="btn btn-light" type="button">
+      Cancel
+    </button>
+  </div>
+</div>

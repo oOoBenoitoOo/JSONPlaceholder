@@ -1,0 +1,43 @@
+<nav>
+  <ul class="pagination justify-content-end cursor">
+    <li class="page-item" [ngClass]="{ disabled: activePage === 1 }">
+      <span class="page-link" (click)="pageHandler('prev')">Previous</span>
+    </li>
+    <li
+      class="page-item"
+      [ngClass]="{ active: activePage === 1 }"
+      (click)="pageHandler(1)"
+    >
+      <a class="page-link">1</a>
+    </li>
+    <li class="page-item disabled" aria-current="page">
+      <span class="page-link">...</span>
+    </li>
+    <li
+      class="page-item"
+      [ngClass]="{ active: ![1, count].includes(activePage) }"
+      aria-current="page"
+    >
+      <span class="page-link">{{
+        [1, count].includes(activePage)
+          ? activePage === 1
+            ? 2
+            : activePage - 1
+          : activePage
+      }}</span>
+    </li>
+    <li class="page-item disabled" aria-current="page">
+      <span class="page-link">...</span>
+    </li>
+    <li
+      class="page-item"
+      [ngClass]="{ active: activePage === count }"
+      (click)="pageHandler(10)"
+    >
+      <a class="page-link">{{ count }}</a>
+    </li>
+    <li class="page-item" [ngClass]="{ disabled: activePage === count }">
+      <a class="page-link" (click)="pageHandler('next')">Next</a>
+    </li>
+  </ul>
+</nav>
